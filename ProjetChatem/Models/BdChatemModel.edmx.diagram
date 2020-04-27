@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cfb1aef0dedc43c1be35d98a35c3107d" Name="Diagram1">
+        <EntityTypeShape EntityType="bdchatemModel.Actualite" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdchatemModel.Commentaire" Width="1.5" PointX="2.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdchatemModel.EtatProjet" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdchatemModel.Evenement" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdchatemModel.FoireAuxQuestion" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdchatemModel.Partenaire" Width="1.5" PointX="7.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdchatemModel.Projet" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdchatemModel.Repertoire" Width="1.5" PointX="7.5" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdchatemModel.sysdiagram" Width="1.5" PointX="4.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdchatemModel.Transaction" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdchatemModel.TypeUtilisateur" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdchatemModel.Utilisateur" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdchatemModel.UtilisateurEvenement" Width="1.5" PointX="10.5" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="bdchatemModel.FK_Projet_EtatProjet1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdchatemModel.FK_UtilisateurEvenement_Evenement" ManuallyRouted="false" />
+        <AssociationConnector Association="bdchatemModel.FK_FoireAuxQuestions_Utilisateur1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdchatemModel.FK_Partenaires_Utilisateur1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdchatemModel.FK_Repertoire_Utilisateur1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdchatemModel.FK_Transaction_Utilisateur1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdchatemModel.FK_Utilisateur_TypeUtilisateur1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdchatemModel.FK_UtilisateurEvenement_Utilisateur" ManuallyRouted="false" />
+        <AssociationConnector Association="bdchatemModel.UtilisateurProjet" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

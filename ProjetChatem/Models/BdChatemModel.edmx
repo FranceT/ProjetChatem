@@ -1,0 +1,823 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bdchatemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actualite">
+          <Key>
+            <PropertyRef Name="numActualite" />
+          </Key>
+          <Property Name="numActualite" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="titreActualite" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descriptionActualite" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Commentaire">
+          <Key>
+            <PropertyRef Name="identifiantCommentaire" />
+          </Key>
+          <Property Name="identifiantCommentaire" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="objet" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="texte" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="propriétaire" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="courriel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="telephone" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="EtatProjet">
+          <Key>
+            <PropertyRef Name="identifiant" />
+          </Key>
+          <Property Name="identifiant" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="nomEtatProjet" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Evenement">
+          <Key>
+            <PropertyRef Name="numEvenement" />
+          </Key>
+          <Property Name="numEvenement" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="nomEvenement" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descriptionEvenement" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="dateEvenement" Type="datetime" Nullable="false" />
+          <Property Name="heureEvenement" Type="time" Precision="7" Nullable="false" />
+          <Property Name="lieuEvenement" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="prixEntree" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FoireAuxQuestions">
+          <Key>
+            <PropertyRef Name="identifiantFAQ" />
+          </Key>
+          <Property Name="identifiantFAQ" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="objet" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="question" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="proprietaireQuestion" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Partenaires">
+          <Key>
+            <PropertyRef Name="numPartenaire" />
+          </Key>
+          <Property Name="numPartenaire" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="numUtilisateurPartenaire" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="nomPartenaire" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="domaineActivite" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="telephone" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="courriel" Type="nvarchar(max)" />
+          <Property Name="adresse" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Projet">
+          <Key>
+            <PropertyRef Name="numProjet" />
+          </Key>
+          <Property Name="numProjet" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="titreProjet" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="descriptionProjet" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="montantRealisation" Type="money" Nullable="false" />
+          <Property Name="tauxParticipation" Type="money" Nullable="false" />
+          <Property Name="nomEtatProjet" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Repertoire">
+          <Key>
+            <PropertyRef Name="identifiant" />
+          </Key>
+          <Property Name="identifiant" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="proprietaire" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="activiteExercee" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descriptionActivite" Type="nvarchar(max)" />
+          <Property Name="contact" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="numTransaction" />
+          </Key>
+          <Property Name="numTransaction" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="numUtilisateurTransaction" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="montantTransaction" Type="money" Nullable="false" />
+          <Property Name="dateTransaction" Type="datetime" Nullable="false" />
+          <Property Name="motifTransaction" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeUtilisateur">
+          <Key>
+            <PropertyRef Name="identifiantUtilisateur" />
+          </Key>
+          <Property Name="identifiantUtilisateur" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="nomtypeUtilisateur" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="numUtilisateur" />
+          </Key>
+          <Property Name="numUtilisateur" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="nomUtilisateur" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="numTelephone" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="courriel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="profession" Type="nvarchar(max)" />
+          <Property Name="villeResidence" Type="nvarchar(max)" />
+          <Property Name="paysOrigine" Type="nvarchar(max)" />
+          <Property Name="visibiliteInfos" Type="bit" Nullable="false" />
+          <Property Name="nomtypeUtilisateur" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="motDePasse" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UtilisateurEvenement">
+          <Key>
+            <PropertyRef Name="numEvenement" />
+            <PropertyRef Name="numUtilisateur" />
+          </Key>
+          <Property Name="numEvenement" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="numUtilisateur" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="nomEvenement" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="nomUtilisateur" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="telephone" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="courriel" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UtilisateurProjet">
+          <Key>
+            <PropertyRef Name="numprojet" />
+            <PropertyRef Name="numUtilisateur" />
+          </Key>
+          <Property Name="numprojet" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="numUtilisateur" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_FoireAuxQuestions_Utilisateur1">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="FoireAuxQuestions" Type="Self.FoireAuxQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="numUtilisateur" />
+            </Principal>
+            <Dependent Role="FoireAuxQuestions">
+              <PropertyRef Name="proprietaireQuestion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partenaires_Utilisateur1">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Partenaires" Type="Self.Partenaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="numUtilisateur" />
+            </Principal>
+            <Dependent Role="Partenaires">
+              <PropertyRef Name="numUtilisateurPartenaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projet_EtatProjet1">
+          <End Role="EtatProjet" Type="Self.EtatProjet" Multiplicity="1" />
+          <End Role="Projet" Type="Self.Projet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EtatProjet">
+              <PropertyRef Name="identifiant" />
+            </Principal>
+            <Dependent Role="Projet">
+              <PropertyRef Name="nomEtatProjet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repertoire_Utilisateur1">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Repertoire" Type="Self.Repertoire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="numUtilisateur" />
+            </Principal>
+            <Dependent Role="Repertoire">
+              <PropertyRef Name="proprietaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_Utilisateur1">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="numUtilisateur" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="numUtilisateurTransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilisateur_TypeUtilisateur1">
+          <End Role="TypeUtilisateur" Type="Self.TypeUtilisateur" Multiplicity="1" />
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeUtilisateur">
+              <PropertyRef Name="identifiantUtilisateur" />
+            </Principal>
+            <Dependent Role="Utilisateur">
+              <PropertyRef Name="nomtypeUtilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UtilisateurEvenement_Evenement">
+          <End Role="Evenement" Type="Self.Evenement" Multiplicity="1" />
+          <End Role="UtilisateurEvenement" Type="Self.UtilisateurEvenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evenement">
+              <PropertyRef Name="numEvenement" />
+            </Principal>
+            <Dependent Role="UtilisateurEvenement">
+              <PropertyRef Name="numEvenement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UtilisateurEvenement_Utilisateur">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="UtilisateurEvenement" Type="Self.UtilisateurEvenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="numUtilisateur" />
+            </Principal>
+            <Dependent Role="UtilisateurEvenement">
+              <PropertyRef Name="numUtilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UtilisateurProjet_Projet">
+          <End Role="Projet" Type="Self.Projet" Multiplicity="1" />
+          <End Role="UtilisateurProjet" Type="Self.UtilisateurProjet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projet">
+              <PropertyRef Name="numProjet" />
+            </Principal>
+            <Dependent Role="UtilisateurProjet">
+              <PropertyRef Name="numprojet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UtilisateurProjet_Utilisateur">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="UtilisateurProjet" Type="Self.UtilisateurProjet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="numUtilisateur" />
+            </Principal>
+            <Dependent Role="UtilisateurProjet">
+              <PropertyRef Name="numUtilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bdchatemModelStoreContainer">
+          <EntitySet Name="Actualite" EntityType="Self.Actualite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commentaire" EntityType="Self.Commentaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EtatProjet" EntityType="Self.EtatProjet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Evenement" EntityType="Self.Evenement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FoireAuxQuestions" EntityType="Self.FoireAuxQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partenaires" EntityType="Self.Partenaires" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projet" EntityType="Self.Projet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Repertoire" EntityType="Self.Repertoire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeUtilisateur" EntityType="Self.TypeUtilisateur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UtilisateurEvenement" EntityType="Self.UtilisateurEvenement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UtilisateurProjet" EntityType="Self.UtilisateurProjet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FoireAuxQuestions_Utilisateur1" Association="Self.FK_FoireAuxQuestions_Utilisateur1">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="FoireAuxQuestions" EntitySet="FoireAuxQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partenaires_Utilisateur1" Association="Self.FK_Partenaires_Utilisateur1">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Partenaires" EntitySet="Partenaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projet_EtatProjet1" Association="Self.FK_Projet_EtatProjet1">
+            <End Role="EtatProjet" EntitySet="EtatProjet" />
+            <End Role="Projet" EntitySet="Projet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repertoire_Utilisateur1" Association="Self.FK_Repertoire_Utilisateur1">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Repertoire" EntitySet="Repertoire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Utilisateur1" Association="Self.FK_Transaction_Utilisateur1">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilisateur_TypeUtilisateur1" Association="Self.FK_Utilisateur_TypeUtilisateur1">
+            <End Role="TypeUtilisateur" EntitySet="TypeUtilisateur" />
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UtilisateurEvenement_Evenement" Association="Self.FK_UtilisateurEvenement_Evenement">
+            <End Role="Evenement" EntitySet="Evenement" />
+            <End Role="UtilisateurEvenement" EntitySet="UtilisateurEvenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UtilisateurEvenement_Utilisateur" Association="Self.FK_UtilisateurEvenement_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="UtilisateurEvenement" EntitySet="UtilisateurEvenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UtilisateurProjet_Projet" Association="Self.FK_UtilisateurProjet_Projet">
+            <End Role="Projet" EntitySet="Projet" />
+            <End Role="UtilisateurProjet" EntitySet="UtilisateurProjet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UtilisateurProjet_Utilisateur" Association="Self.FK_UtilisateurProjet_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="UtilisateurProjet" EntitySet="UtilisateurProjet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bdchatemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actualite">
+          <Key>
+            <PropertyRef Name="numActualite" />
+          </Key>
+          <Property Name="numActualite" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="titreActualite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descriptionActualite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Commentaire">
+          <Key>
+            <PropertyRef Name="identifiantCommentaire" />
+          </Key>
+          <Property Name="identifiantCommentaire" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="objet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="texte" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="propriétaire" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="courriel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telephone" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="EtatProjet">
+          <Key>
+            <PropertyRef Name="identifiant" />
+          </Key>
+          <Property Name="identifiant" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nomEtatProjet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Projets" Relationship="Self.FK_Projet_EtatProjet1" FromRole="EtatProjet" ToRole="Projet" />
+        </EntityType>
+        <EntityType Name="Evenement">
+          <Key>
+            <PropertyRef Name="numEvenement" />
+          </Key>
+          <Property Name="numEvenement" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nomEvenement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descriptionEvenement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dateEvenement" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="heureEvenement" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="lieuEvenement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prixEntree" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="UtilisateurEvenements" Relationship="Self.FK_UtilisateurEvenement_Evenement" FromRole="Evenement" ToRole="UtilisateurEvenement" />
+        </EntityType>
+        <EntityType Name="FoireAuxQuestion">
+          <Key>
+            <PropertyRef Name="identifiantFAQ" />
+          </Key>
+          <Property Name="identifiantFAQ" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="objet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="proprietaireQuestion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK_FoireAuxQuestions_Utilisateur1" FromRole="FoireAuxQuestions" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Partenaire">
+          <Key>
+            <PropertyRef Name="numPartenaire" />
+          </Key>
+          <Property Name="numPartenaire" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="numUtilisateurPartenaire" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nomPartenaire" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="domaineActivite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telephone" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="courriel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Partenaires_Utilisateur1" FromRole="Partenaires" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Projet">
+          <Key>
+            <PropertyRef Name="numProjet" />
+          </Key>
+          <Property Name="numProjet" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="titreProjet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descriptionProjet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="montantRealisation" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="tauxParticipation" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="nomEtatProjet" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EtatProjet" Relationship="Self.FK_Projet_EtatProjet1" FromRole="Projet" ToRole="EtatProjet" />
+          <NavigationProperty Name="Utilisateurs" Relationship="Self.UtilisateurProjet" FromRole="Projet" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Repertoire">
+          <Key>
+            <PropertyRef Name="identifiant" />
+          </Key>
+          <Property Name="identifiant" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="proprietaire" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="activiteExercee" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descriptionActivite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="contact" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Repertoire_Utilisateur1" FromRole="Repertoire" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="numTransaction" />
+          </Key>
+          <Property Name="numTransaction" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="numUtilisateurTransaction" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="montantTransaction" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="dateTransaction" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="motifTransaction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Transaction_Utilisateur1" FromRole="Transaction" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="TypeUtilisateur">
+          <Key>
+            <PropertyRef Name="identifiantUtilisateur" />
+          </Key>
+          <Property Name="identifiantUtilisateur" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nomtypeUtilisateur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Utilisateurs" Relationship="Self.FK_Utilisateur_TypeUtilisateur1" FromRole="TypeUtilisateur" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="numUtilisateur" />
+          </Key>
+          <Property Name="numUtilisateur" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nomUtilisateur" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="numTelephone" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="courriel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="profession" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="villeResidence" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="paysOrigine" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="visibiliteInfos" Type="Boolean" Nullable="false" />
+          <Property Name="nomtypeUtilisateur" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="motDePasse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FoireAuxQuestions" Relationship="Self.FK_FoireAuxQuestions_Utilisateur1" FromRole="Utilisateur" ToRole="FoireAuxQuestions" />
+          <NavigationProperty Name="Partenaires" Relationship="Self.FK_Partenaires_Utilisateur1" FromRole="Utilisateur" ToRole="Partenaires" />
+          <NavigationProperty Name="Repertoires" Relationship="Self.FK_Repertoire_Utilisateur1" FromRole="Utilisateur" ToRole="Repertoire" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK_Transaction_Utilisateur1" FromRole="Utilisateur" ToRole="Transaction" />
+          <NavigationProperty Name="TypeUtilisateur" Relationship="Self.FK_Utilisateur_TypeUtilisateur1" FromRole="Utilisateur" ToRole="TypeUtilisateur" />
+          <NavigationProperty Name="UtilisateurEvenements" Relationship="Self.FK_UtilisateurEvenement_Utilisateur" FromRole="Utilisateur" ToRole="UtilisateurEvenement" />
+          <NavigationProperty Name="Projets" Relationship="Self.UtilisateurProjet" FromRole="Utilisateur" ToRole="Projet" />
+        </EntityType>
+        <EntityType Name="UtilisateurEvenement">
+          <Key>
+            <PropertyRef Name="numEvenement" />
+            <PropertyRef Name="numUtilisateur" />
+          </Key>
+          <Property Name="numEvenement" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="numUtilisateur" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nomEvenement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nomUtilisateur" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telephone" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="courriel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Evenement" Relationship="Self.FK_UtilisateurEvenement_Evenement" FromRole="UtilisateurEvenement" ToRole="Evenement" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK_UtilisateurEvenement_Utilisateur" FromRole="UtilisateurEvenement" ToRole="Utilisateur" />
+        </EntityType>
+        <Association Name="FK_Projet_EtatProjet1">
+          <End Role="EtatProjet" Type="Self.EtatProjet" Multiplicity="1" />
+          <End Role="Projet" Type="Self.Projet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EtatProjet">
+              <PropertyRef Name="identifiant" />
+            </Principal>
+            <Dependent Role="Projet">
+              <PropertyRef Name="nomEtatProjet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UtilisateurEvenement_Evenement">
+          <End Role="Evenement" Type="Self.Evenement" Multiplicity="1" />
+          <End Role="UtilisateurEvenement" Type="Self.UtilisateurEvenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evenement">
+              <PropertyRef Name="numEvenement" />
+            </Principal>
+            <Dependent Role="UtilisateurEvenement">
+              <PropertyRef Name="numEvenement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FoireAuxQuestions_Utilisateur1">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="FoireAuxQuestions" Type="Self.FoireAuxQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="numUtilisateur" />
+            </Principal>
+            <Dependent Role="FoireAuxQuestions">
+              <PropertyRef Name="proprietaireQuestion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partenaires_Utilisateur1">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Partenaires" Type="Self.Partenaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="numUtilisateur" />
+            </Principal>
+            <Dependent Role="Partenaires">
+              <PropertyRef Name="numUtilisateurPartenaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repertoire_Utilisateur1">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Repertoire" Type="Self.Repertoire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="numUtilisateur" />
+            </Principal>
+            <Dependent Role="Repertoire">
+              <PropertyRef Name="proprietaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_Utilisateur1">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="numUtilisateur" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="numUtilisateurTransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilisateur_TypeUtilisateur1">
+          <End Role="TypeUtilisateur" Type="Self.TypeUtilisateur" Multiplicity="1" />
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeUtilisateur">
+              <PropertyRef Name="identifiantUtilisateur" />
+            </Principal>
+            <Dependent Role="Utilisateur">
+              <PropertyRef Name="nomtypeUtilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UtilisateurEvenement_Utilisateur">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="UtilisateurEvenement" Type="Self.UtilisateurEvenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="numUtilisateur" />
+            </Principal>
+            <Dependent Role="UtilisateurEvenement">
+              <PropertyRef Name="numUtilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UtilisateurProjet">
+          <End Role="Projet" Type="Self.Projet" Multiplicity="*" />
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="bdchatemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actualites" EntityType="Self.Actualite" />
+          <EntitySet Name="Commentaires" EntityType="Self.Commentaire" />
+          <EntitySet Name="EtatProjets" EntityType="Self.EtatProjet" />
+          <EntitySet Name="Evenements" EntityType="Self.Evenement" />
+          <EntitySet Name="FoireAuxQuestions" EntityType="Self.FoireAuxQuestion" />
+          <EntitySet Name="Partenaires" EntityType="Self.Partenaire" />
+          <EntitySet Name="Projets" EntityType="Self.Projet" />
+          <EntitySet Name="Repertoires" EntityType="Self.Repertoire" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <EntitySet Name="TypeUtilisateurs" EntityType="Self.TypeUtilisateur" />
+          <EntitySet Name="Utilisateurs" EntityType="Self.Utilisateur" />
+          <EntitySet Name="UtilisateurEvenements" EntityType="Self.UtilisateurEvenement" />
+          <AssociationSet Name="FK_Projet_EtatProjet1" Association="Self.FK_Projet_EtatProjet1">
+            <End Role="EtatProjet" EntitySet="EtatProjets" />
+            <End Role="Projet" EntitySet="Projets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UtilisateurEvenement_Evenement" Association="Self.FK_UtilisateurEvenement_Evenement">
+            <End Role="Evenement" EntitySet="Evenements" />
+            <End Role="UtilisateurEvenement" EntitySet="UtilisateurEvenements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FoireAuxQuestions_Utilisateur1" Association="Self.FK_FoireAuxQuestions_Utilisateur1">
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+            <End Role="FoireAuxQuestions" EntitySet="FoireAuxQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partenaires_Utilisateur1" Association="Self.FK_Partenaires_Utilisateur1">
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+            <End Role="Partenaires" EntitySet="Partenaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repertoire_Utilisateur1" Association="Self.FK_Repertoire_Utilisateur1">
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+            <End Role="Repertoire" EntitySet="Repertoires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Utilisateur1" Association="Self.FK_Transaction_Utilisateur1">
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilisateur_TypeUtilisateur1" Association="Self.FK_Utilisateur_TypeUtilisateur1">
+            <End Role="TypeUtilisateur" EntitySet="TypeUtilisateurs" />
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UtilisateurEvenement_Utilisateur" Association="Self.FK_UtilisateurEvenement_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+            <End Role="UtilisateurEvenement" EntitySet="UtilisateurEvenements" />
+          </AssociationSet>
+          <AssociationSet Name="UtilisateurProjet" Association="Self.UtilisateurProjet">
+            <End Role="Projet" EntitySet="Projets" />
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bdchatemModelStoreContainer" CdmEntityContainer="bdchatemEntities">
+          <EntitySetMapping Name="Actualites">
+            <EntityTypeMapping TypeName="bdchatemModel.Actualite">
+              <MappingFragment StoreEntitySet="Actualite">
+                <ScalarProperty Name="numActualite" ColumnName="numActualite" />
+                <ScalarProperty Name="titreActualite" ColumnName="titreActualite" />
+                <ScalarProperty Name="descriptionActualite" ColumnName="descriptionActualite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commentaires">
+            <EntityTypeMapping TypeName="bdchatemModel.Commentaire">
+              <MappingFragment StoreEntitySet="Commentaire">
+                <ScalarProperty Name="identifiantCommentaire" ColumnName="identifiantCommentaire" />
+                <ScalarProperty Name="objet" ColumnName="objet" />
+                <ScalarProperty Name="texte" ColumnName="texte" />
+                <ScalarProperty Name="propriétaire" ColumnName="propriétaire" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="courriel" ColumnName="courriel" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EtatProjets">
+            <EntityTypeMapping TypeName="bdchatemModel.EtatProjet">
+              <MappingFragment StoreEntitySet="EtatProjet">
+                <ScalarProperty Name="identifiant" ColumnName="identifiant" />
+                <ScalarProperty Name="nomEtatProjet" ColumnName="nomEtatProjet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evenements">
+            <EntityTypeMapping TypeName="bdchatemModel.Evenement">
+              <MappingFragment StoreEntitySet="Evenement">
+                <ScalarProperty Name="numEvenement" ColumnName="numEvenement" />
+                <ScalarProperty Name="nomEvenement" ColumnName="nomEvenement" />
+                <ScalarProperty Name="descriptionEvenement" ColumnName="descriptionEvenement" />
+                <ScalarProperty Name="dateEvenement" ColumnName="dateEvenement" />
+                <ScalarProperty Name="heureEvenement" ColumnName="heureEvenement" />
+                <ScalarProperty Name="lieuEvenement" ColumnName="lieuEvenement" />
+                <ScalarProperty Name="prixEntree" ColumnName="prixEntree" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoireAuxQuestions">
+            <EntityTypeMapping TypeName="bdchatemModel.FoireAuxQuestion">
+              <MappingFragment StoreEntitySet="FoireAuxQuestions">
+                <ScalarProperty Name="identifiantFAQ" ColumnName="identifiantFAQ" />
+                <ScalarProperty Name="objet" ColumnName="objet" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="proprietaireQuestion" ColumnName="proprietaireQuestion" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partenaires">
+            <EntityTypeMapping TypeName="bdchatemModel.Partenaire">
+              <MappingFragment StoreEntitySet="Partenaires">
+                <ScalarProperty Name="numPartenaire" ColumnName="numPartenaire" />
+                <ScalarProperty Name="numUtilisateurPartenaire" ColumnName="numUtilisateurPartenaire" />
+                <ScalarProperty Name="nomPartenaire" ColumnName="nomPartenaire" />
+                <ScalarProperty Name="domaineActivite" ColumnName="domaineActivite" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="courriel" ColumnName="courriel" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projets">
+            <EntityTypeMapping TypeName="bdchatemModel.Projet">
+              <MappingFragment StoreEntitySet="Projet">
+                <ScalarProperty Name="numProjet" ColumnName="numProjet" />
+                <ScalarProperty Name="titreProjet" ColumnName="titreProjet" />
+                <ScalarProperty Name="descriptionProjet" ColumnName="descriptionProjet" />
+                <ScalarProperty Name="montantRealisation" ColumnName="montantRealisation" />
+                <ScalarProperty Name="tauxParticipation" ColumnName="tauxParticipation" />
+                <ScalarProperty Name="nomEtatProjet" ColumnName="nomEtatProjet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Repertoires">
+            <EntityTypeMapping TypeName="bdchatemModel.Repertoire">
+              <MappingFragment StoreEntitySet="Repertoire">
+                <ScalarProperty Name="identifiant" ColumnName="identifiant" />
+                <ScalarProperty Name="proprietaire" ColumnName="proprietaire" />
+                <ScalarProperty Name="activiteExercee" ColumnName="activiteExercee" />
+                <ScalarProperty Name="descriptionActivite" ColumnName="descriptionActivite" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="bdchatemModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="bdchatemModel.Transaction">
+              <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="numTransaction" ColumnName="numTransaction" />
+                <ScalarProperty Name="numUtilisateurTransaction" ColumnName="numUtilisateurTransaction" />
+                <ScalarProperty Name="montantTransaction" ColumnName="montantTransaction" />
+                <ScalarProperty Name="dateTransaction" ColumnName="dateTransaction" />
+                <ScalarProperty Name="motifTransaction" ColumnName="motifTransaction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeUtilisateurs">
+            <EntityTypeMapping TypeName="bdchatemModel.TypeUtilisateur">
+              <MappingFragment StoreEntitySet="TypeUtilisateur">
+                <ScalarProperty Name="identifiantUtilisateur" ColumnName="identifiantUtilisateur" />
+                <ScalarProperty Name="nomtypeUtilisateur" ColumnName="nomtypeUtilisateur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilisateurs">
+            <EntityTypeMapping TypeName="bdchatemModel.Utilisateur">
+              <MappingFragment StoreEntitySet="Utilisateur">
+                <ScalarProperty Name="numUtilisateur" ColumnName="numUtilisateur" />
+                <ScalarProperty Name="nomUtilisateur" ColumnName="nomUtilisateur" />
+                <ScalarProperty Name="numTelephone" ColumnName="numTelephone" />
+                <ScalarProperty Name="courriel" ColumnName="courriel" />
+                <ScalarProperty Name="profession" ColumnName="profession" />
+                <ScalarProperty Name="villeResidence" ColumnName="villeResidence" />
+                <ScalarProperty Name="paysOrigine" ColumnName="paysOrigine" />
+                <ScalarProperty Name="visibiliteInfos" ColumnName="visibiliteInfos" />
+                <ScalarProperty Name="nomtypeUtilisateur" ColumnName="nomtypeUtilisateur" />
+                <ScalarProperty Name="motDePasse" ColumnName="motDePasse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UtilisateurEvenements">
+            <EntityTypeMapping TypeName="bdchatemModel.UtilisateurEvenement">
+              <MappingFragment StoreEntitySet="UtilisateurEvenement">
+                <ScalarProperty Name="numEvenement" ColumnName="numEvenement" />
+                <ScalarProperty Name="numUtilisateur" ColumnName="numUtilisateur" />
+                <ScalarProperty Name="nomEvenement" ColumnName="nomEvenement" />
+                <ScalarProperty Name="nomUtilisateur" ColumnName="nomUtilisateur" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="courriel" ColumnName="courriel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UtilisateurProjet" TypeName="bdchatemModel.UtilisateurProjet" StoreEntitySet="UtilisateurProjet">
+            <EndProperty Name="Projet">
+              <ScalarProperty Name="numProjet" ColumnName="numprojet" />
+            </EndProperty>
+            <EndProperty Name="Utilisateur">
+              <ScalarProperty Name="numUtilisateur" ColumnName="numUtilisateur" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
